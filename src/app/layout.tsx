@@ -2,7 +2,17 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+import { DM_Sans } from "next/font/google";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { repositoryName } from "@/prismicio";
+import { PrismicPreview } from "@prismicio/next";
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-dm-sans",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +25,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={dmSans.variable}>
+      <body className='grid bg-[#070815] text-white'>
+      <Header/>
+      <main>
+        {children}
+      </main>
+      <Footer/>
+      <PrismicPreview repositoryName={repositoryName}/>
+      </body>
     </html>
   );
 }
